@@ -5,95 +5,96 @@ import java.time.temporal.Temporal;
 import java.util.Arrays;
 
 public class Funcionarios {
+	
+	public String nomeFuncionario;
+    public String cargo;
+    public double salarioBase;
+    public double bonusAnual;
+    public double beneficio;    
+    public String dataDeContrato; 
+    public double valorVendas;
+    LocalDate hoje = LocalDate.now();
 
-    private String nomeFuncionario;
-    private CargosEnum cargo;
-    private LocalDate periodoContratacao;  
-    LocalDate hoje = LocalDate.now();  
+    
 
-    public Funcionarios() {
+    public Funcionarios(String nomeFuncionario, String cargo, double salarioBase, double bonusAnual, double beneficio,
+			String dataDeContrato, double valorVendas) {
+		super();
+		this.nomeFuncionario = nomeFuncionario;
+		this.cargo = cargo;
+		this.salarioBase = salarioBase;
+		this.bonusAnual = bonusAnual;
+		this.beneficio = beneficio;
+		this.dataDeContrato = dataDeContrato;
+		this.valorVendas = valorVendas;
+	}
+    
+    public static long calcularDiasEntre(String dataRecebida) {
+        LocalDate dataDeContrato = LocalDate.parse(dataRecebida);
+        LocalDate hoje = LocalDate.now();
+
+        return ChronoUnit.DAYS.between(dataDeContrato, hoje);
     }
+   
 
-    public Funcionarios(String nomeFuncionario, LocalDate periodoContratacao, float salarioBruto, CargosEnum cargo) {
-        super();
-        this.nomeFuncionario = nomeFuncionario;
-        this.cargo = cargo;
-        this.periodoContratacao = periodoContratacao;
-    }
+	public String getNomeFuncionario() {
+		return nomeFuncionario;
+	}
 
-    Double[] vendasV1 = {5200.0, 4000.0, 4200.0, 5850.0, 7000.0};
-    Double[] vendasV2 = {3400.0, 7700.0, 5000.0, 5900.0, 6500.0};
+	public void setNomeFuncionario(String nomeFuncionario) {
+		this.nomeFuncionario = nomeFuncionario;
+	}
 
-    private double valorVendidoVendedor1() {
-        return Arrays.stream(vendasV1).mapToDouble(Double::doubleValue).sum();
-    }
+	public String getCargo() {
+		return cargo;
+	}
 
-    private double valorVendidoVendedor2() {
-        return Arrays.stream(vendasV2).mapToDouble(Double::doubleValue).sum();
-    }
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
+	}
 
-    public Duration tempoTrabalho() {
-        return Duration.between(periodoContratacao.atStartOfDay(), hoje.atStartOfDay());
-    }
+	public double getSalarioBase() {
+		return salarioBase;
+	}
 
-    public void calcularSalario() {
-        double salarioBase = 0;
-        double bonusPorAno = 0;
-        double porcentagemBonus = 0;
+	public void setSalarioBase(double salarioBase) {
+		this.salarioBase = salarioBase;
+	}
 
-        int anosDeTrabalho = getAnosDeTrabalho();
+	public double getBonusAnual() {
+		return bonusAnual;
+	}
 
-        switch (this.cargo) {
-            case GERENTE:
-                salarioBase = 20000;
-                bonusPorAno = 3000;
-                break;
-            case SECRETARIO:
-                salarioBase = 7000;
-                bonusPorAno = 1000;
-                porcentagemBonus = 0.20;
-                break;
-            case VENDEDOR:
-                salarioBase = 12000;
-                bonusPorAno = 300;
-                porcentagemBonus = 0.30;
-                break;
-        }
+	public void setBonusAnual(double bonusAnual) {
+		this.bonusAnual = bonusAnual;
+	}
 
-        double salarioFinal = salarioBase + (anosDeTrabalho * bonusPorAno);
-        if (porcentagemBonus > 0) {
-            salarioFinal += salarioBase * porcentagemBonus;
-        }
+	public double getBeneficio() {
+		return beneficio;
+	}
 
-        System.out.println("Salário final: " + salarioFinal);
-    }
+	public void setBeneficio(double beneficio) {
+		this.beneficio = beneficio;
+	}
 
-    private int getAnosDeTrabalho() {
-        return (int) ChronoUnit.YEARS.between(periodoContratacao, hoje);
-    }
+	public String getDataDeContrato() {
+		return dataDeContrato;
+	}
 
-    public String getNomeFuncionario() {
-        return nomeFuncionario;
-    }
+	public void setDataDeContrato(String dataDeContrato) {
+		this.dataDeContrato = dataDeContrato;
+	}
 
-    public void setNomeFuncionario(String nomeFuncionario) {
-        this.nomeFuncionario = nomeFuncionario;
-    }
+	public double getValorVendas() {
+		return valorVendas;
+	}
 
-    public LocalDate getPeriodoContratacao() {
-        return periodoContratacao;
-    }
-
-    public void setPeriodoContratacao(LocalDate periodoContratacao) {
-        this.periodoContratacao = periodoContratacao;
-    }
-
-    public CargosEnum getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(CargosEnum cargo) {
-        this.cargo = cargo;
-    }
-
+	public void setValorVendas(double valorVendas) {
+		this.valorVendas = valorVendas;
+	}
 }
+	
+	
+    
+    
+    
